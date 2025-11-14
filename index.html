@@ -32,14 +32,43 @@
       border-radius: 10px;
       padding: 20px 24px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      max-height: 80vh;          /* enable inner scroll */
+      overflow-y: auto;
+      position: relative;
     }
 
     .menu-title {
       font-size: 1.8rem;
       font-weight: 700;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       border-bottom: 2px solid #e0e0e0;
       padding-bottom: 8px;
+    }
+
+    /* Sticky Menu : .... Price header */
+    .menu-header-row {
+      position: sticky;
+      top: 0;
+      display: flex;
+      align-items: center;
+      background: #ffffff;
+      padding: 6px 0;
+      margin-bottom: 4px;
+      border-bottom: 2px solid #e0e0e0;
+      font-size: 0.95rem;
+      font-weight: 600;
+      z-index: 2;
+    }
+
+    .menu-header-label,
+    .menu-header-price {
+      white-space: nowrap;
+    }
+
+    .menu-header-dots {
+      flex: 1;
+      border-bottom: 1px dotted #aaa;
+      margin: 0 8px;
     }
 
     .menu-item {
@@ -60,15 +89,27 @@
     }
 
     .item-name {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: 700;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
 
     .item-desc {
       font-size: 0.9rem;
       color: #555;
       line-height: 1.4;
+    }
+
+    .item-name-cn {
+      font-size: 1rem;
+      margin-top: 4px;
+    }
+
+    .item-desc-cn {
+      font-size: 0.8rem;
+      color: #555;
+      line-height: 1.4;
+      margin-top: 2px;
     }
 
     .item-price {
@@ -173,7 +214,8 @@
         grid-template-columns: 1fr;
       }
 
-      .menu-section, .sidebar {
+      .menu-section,
+      .sidebar {
         grid-column: 1 / -1;
       }
     }
@@ -183,106 +225,123 @@
   <div class="page-container">
     <!-- Left: Menu (8 columns) -->
     <section class="menu-section">
-      <div class="menu-title">Western Breakfast &amp; Mains</div>
+      <div class="menu-title">AI.CAN Wok Kitchen 中式炒锅精选</div>
 
-      <div class="menu-item">
-        <div class="menu-text">
-          <div class="item-name">Country Breakfast Platter</div>
-          <div class="item-desc">
-            Toasted brioche, chipolata sausages, smoked bacon, grilled tomato, hash brown &amp; scrambled eggs
-          </div>
-        </div>
-        <div class="item-price">$10.00</div>
+      <!-- Sticky header: Menu : ............... Price -->
+      <div class="menu-header-row">
+        <span class="menu-header-label">Menu:</span>
+        <span class="menu-header-dots" aria-hidden="true"></span>
+        <span class="menu-header-price">Price</span>
       </div>
 
+      <!-- 1 -->
       <div class="menu-item">
         <div class="menu-text">
-          <div class="item-name">Avocado Sourdough Toast</div>
-          <div class="item-desc">
-            Crushed avocado on warm sourdough with cherry tomatoes, feta crumble &amp; poached egg
-          </div>
+          <div class="item-name"><strong>1) Yan Chow Supreme Fried Rice</strong></div>
+          <div class="item-desc"><em>Fragrant wok-hei fried rice with shrimp, egg and mixed vegetables.</em></div>
+          <div class="item-name-cn">扬州至尊炒饭</div>
+          <div class="item-desc-cn">经典锅气炒饭，配虾仁、鸡蛋和什锦蔬菜。</div>
+        </div>
+        <div class="item-price">$8.80</div>
+      </div>
+
+      <!-- 2 -->
+      <div class="menu-item">
+        <div class="menu-text">
+          <div class="item-name"><strong>2) San Lau Sliced Fish Hor Fun</strong></div>
+          <div class="item-desc"><em>Silky flat rice noodles tossed dry with sliced fish, beansprouts and egg.</em></div>
+          <div class="item-name-cn">三捞鱼片河粉</div>
+          <div class="item-desc-cn">鲜鱼片、豆芽与滑蛋干炒河粉，清香爽口。</div>
+        </div>
+        <div class="item-price">$9.80</div>
+      </div>
+
+      <!-- 3 -->
+      <div class="menu-item">
+        <div class="menu-text">
+          <div class="item-name"><strong>3) Smoky Beef Fried Hor Fun</strong></div>
+          <div class="item-desc"><em>Classic dark soy stir-fried hor fun with tender beef slices.</em></div>
+          <div class="item-name-cn">干炒牛河</div>
+          <div class="item-desc-cn">嫩滑牛肉宽河粉，大火快炒，锅气十足。</div>
+        </div>
+        <div class="item-price">$10.20</div>
+      </div>
+
+      <!-- 4 -->
+      <div class="menu-item">
+        <div class="menu-text">
+          <div class="item-name"><strong>4) Golden Salted Egg Prawn Wok</strong></div>
+          <div class="item-desc"><em>Crispy prawns coated in creamy salted egg yolk sauce.</em></div>
+          <div class="item-name-cn">金沙咸蛋黄虾球</div>
+          <div class="item-desc-cn">香浓咸蛋黄裹鲜虾，外酥内嫩，咸香开胃。</div>
+        </div>
+        <div class="item-price">$13.80</div>
+      </div>
+
+      <!-- 5 -->
+      <div class="menu-item">
+        <div class="menu-text">
+          <div class="item-name"><strong>5) XO Seafood Crispy Noodles</strong></div>
+          <div class="item-desc"><em>Crispy egg noodles topped with XO sauce, prawns, squid and vegetables.</em></div>
+          <div class="item-name-cn">XO海鲜干烧脆面</div>
+          <div class="item-desc-cn">香脆面条配XO酱海鲜与时蔬，味道浓郁。</div>
+        </div>
+        <div class="item-price">$12.80</div>
+      </div>
+
+      <!-- 6 -->
+      <div class="menu-item">
+        <div class="menu-text">
+          <div class="item-name"><strong>6) Black Pepper Chicken Cube Rice</strong></div>
+          <div class="item-desc"><em>Wok-fried chicken cubes with black pepper sauce over steamed rice.</em></div>
+          <div class="item-name-cn">黑胡椒鸡丁盖饭</div>
+          <div class="item-desc-cn">黑胡椒酱爆炒鸡丁，配白饭，香辣惹味。</div>
         </div>
         <div class="item-price">$8.50</div>
       </div>
 
+      <!-- 7 -->
       <div class="menu-item">
         <div class="menu-text">
-          <div class="item-name">Smoked Salmon Benedict</div>
-          <div class="item-desc">
-            Two poached eggs on English muffins with smoked salmon, sautéed spinach &amp; hollandaise
-          </div>
+          <div class="item-name"><strong>7) Claypot Lap Cheong Fragrant Rice</strong></div>
+          <div class="item-desc"><em>Claypot rice with Chinese sausage, mushroom and spring onion.</em></div>
+          <div class="item-name-cn">腊肠煲仔饭</div>
+          <div class="item-desc-cn">腊肠与香菇慢煲入味，锅巴香脆可口。</div>
         </div>
-        <div class="item-price">$12.90</div>
+        <div class="item-price">$11.50</div>
       </div>
 
+      <!-- 8 -->
       <div class="menu-item">
         <div class="menu-text">
-          <div class="item-name">Hearty Tomato Basil Soup</div>
-          <div class="item-desc">
-            Slow-simmered Roma tomato soup with fresh basil, served with garlic butter toast
-          </div>
+          <div class="item-name"><strong>8) Mala Fire Wok Udon</strong></div>
+          <div class="item-desc"><em>Chewy udon stir-fried in spicy mala sauce with sliced pork and vegetables.</em></div>
+          <div class="item-name-cn">麻辣火焰乌冬面</div>
+          <div class="item-desc-cn">麻辣酱汁裹乌冬与猪肉片，香麻带劲。</div>
+        </div>
+        <div class="item-price">$10.80</div>
+      </div>
+
+      <!-- 9 -->
+      <div class="menu-item">
+        <div class="menu-text">
+          <div class="item-name"><strong>9) Vegetarian Treasure Fried Rice</strong></div>
+          <div class="item-desc"><em>Light wok-fried rice with mixed vegetables, tofu and mushroom.</em></div>
+          <div class="item-name-cn">素锦宝炒饭</div>
+          <div class="item-desc-cn">多种蔬菜配豆腐与香菇，清爽不油腻。</div>
         </div>
         <div class="item-price">$7.80</div>
       </div>
 
+      <!-- 10 -->
       <div class="menu-item">
         <div class="menu-text">
-          <div class="item-name">Classic Caesar Salad</div>
-          <div class="item-desc">
-            Crisp romaine, parmesan, garlic croutons &amp; house Caesar dressing, topped with grilled chicken
-          </div>
+          <div class="item-name"><strong>10) AICAN Robot Chef Signature Platter</strong></div>
+          <div class="item-desc"><em>Chef’s special trio of fried rice, hor fun and crispy wings from our robotic wok.</em></div>
+          <div class="item-name-cn">AICAN机甲招牌总汇</div>
+          <div class="item-desc-cn">机器人炒制三式拼盘：炒饭、河粉与香脆鸡翼。</div>
         </div>
-        <div class="item-price">$11.90</div>
-      </div>
-
-      <div class="menu-item">
-        <div class="menu-text">
-          <div class="item-name">Crispy Chicken Burger</div>
-          <div class="item-desc">
-            Buttermilk fried chicken, lettuce, tomato, pickles &amp; house mayo in a toasted brioche bun
-          </div>
-        </div>
-        <div class="item-price">$13.50</div>
-      </div>
-
-      <div class="menu-item">
-        <div class="menu-text">
-          <div class="item-name">BBQ Angus Cheeseburger</div>
-          <div class="item-desc">
-            Chargrilled Angus patty, melted cheddar, caramelised onions &amp; smoky BBQ sauce
-          </div>
-        </div>
-        <div class="item-price">$15.90</div>
-      </div>
-
-      <div class="menu-item">
-        <div class="menu-text">
-          <div class="item-name">Garlic Prawn Aglio Olio</div>
-          <div class="item-desc">
-            Spaghetti tossed with garlic, chili flakes, olive oil &amp; sautéed prawns
-          </div>
-        </div>
-        <div class="item-price">$16.80</div>
-      </div>
-
-      <div class="menu-item">
-        <div class="menu-text">
-          <div class="item-name">Herb-Crusted Salmon Fillet</div>
-          <div class="item-desc">
-            Oven-baked salmon with lemon herb crust, mashed potatoes &amp; seasonal vegetables
-          </div>
-        </div>
-        <div class="item-price">$18.50</div>
-      </div>
-
-      <div class="menu-item">
-        <div class="menu-text">
-          <div class="item-name">Warm Chocolate Lava Cake</div>
-          <div class="item-desc">
-            Rich molten-centre chocolate cake served with vanilla bean ice cream
-          </div>
-        </div>
-        <div class="item-price">$8.90</div>
+        <div class="item-price">$14.80</div>
       </div>
     </section>
 
