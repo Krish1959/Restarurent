@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI.CAN Restaurant Menu</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f5;
+      color: #222;
+    }
+
+    .page-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+
+    /* Left: Menu (8 columns) */
+    .menu-section {
+      grid-column: span 8;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 20px 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .menu-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 8px;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px dashed #ddd;
+    }
+
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+
+    .menu-text {
+      flex: 1;
+    }
+
+    .item-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .item-desc {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    .item-price {
+      font-size: 1.05rem;
+      font-weight: 700;
+      white-space: nowrap;
+      margin-left: 8px;
+    }
+
+    /* Right: Others panel (4 columns, 24 rows) */
+    .sidebar {
+      grid-column: span 4;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      display: grid;
+      grid-template-rows: repeat(24, minmax(0, 1fr));
+      overflow: hidden;
+      min-height: 600px;
+    }
+
+    /* First 2 rows: header */
+    .sidebar-header {
+      grid-row: 1 / span 2;
+      background: #003366; /* Dark blue */
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .sidebar-header h1 {
+      font-size: 1.8rem;
+      letter-spacing: 0.08em;
+    }
+
+    /* Next 8 rows: Avatar area */
+    .sidebar-avatar {
+      grid-row: 3 / span 8;
+      position: relative;
+      border-bottom: 1px solid #e0e0e0;
+      background: #fafafa;
+      overflow: hidden;               /* clip to box */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #avatar-slot {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Last 14 rows: Order area */
+    .sidebar-order {
+      grid-row: 11 / span 14;
+      padding: 10px 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .order-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .order-subtitle {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 6px;
+    }
+
+    .order-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .order-table th,
+    .order-table td {
+      border: 1px solid #ddd;
+      padding: 4px 6px;
+      text-align: left;
+      height: 22px;
+    }
+
+    .order-table th {
+      background: #f0f0f0;
+      font-weight: 600;
+    }
+
+    .order-table td {
+      background: #ffffff;
+    }
+
+    /* Simple responsiveness */
+    @media (max-width: 900px) {
+      .page-container {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-section, .sidebar {
+        grid-column: 1 / -1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Left: Menu (8 columns) -->
+    <section class="menu-section">
+      <div class="menu-title">Western Breakfast &amp; Mains</div>
+
+      <div class="menu-item">
+        <div class="menu-text">
+          <div class="item-name">Country Breakfast Platter</div>
+          <div class="item-desc">
+            Toasted brioche, chipolata sausages, smoked bacon, grilled tomato, hash brown &amp; scrambled eggs
+          </div>
+        </div>
+        <div class="item-price">$10.00</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-text">
+          <div class="item-name">Avocado Sourdough Toast</div>
+          <div class="item-desc">
+            Crushed avocado on warm sourdough with cherry tomatoes, feta crumble &amp; poached egg
+          </div>
+        </div>
+        <div class="item-price">$8.50</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-text">
+          <div class="item-name">Smoked Salmon Benedict</div>
+          <div class="item-desc">
+            Two poached eggs on English muffins with smoked salmon, sautéed spinach &amp; hollandaise
+          </div>
+        </div>
+        <div class="item-price">$12.90</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-text">
+          <div class="item-name">Hearty Tomato Basil Soup</div>
+          <div class="item-desc">
+            Slow-simmered Roma tomato soup with fresh basil, served with garlic butter toast
+          </div>
+        </div>
+        <div class="item-price">$7.80</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-text">
+          <div class="item-name">Classic Caesar Salad</div>
+          <div class="item-desc">
+            Crisp romaine, parmesan, garlic croutons &amp; house Caesar dressing, topped with grilled chicken
+          </div>
+        </div>
+        <div class="item-price">$11.90</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-text">
+          <div class="item-name">Crispy Chicken Burger</div>
+          <div class="item-desc">
+            Buttermilk fried chicken, lettuce, tomato, pickles &amp; house mayo in a toasted brioche bun
+          </div>
+        </div>
+        <div class="item-price">$13.50</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-text">
+          <div class="item-name">BBQ Angus Cheeseburger</div>
+          <div class="item-desc">
+            Chargrilled Angus patty, melted cheddar, caramelised onions &amp; smoky BBQ sauce
+          </div>
+        </div>
+        <div class="item-price">$15.90</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-text">
+          <div class="item-name">Garlic Prawn Aglio Olio</div>
+          <div class="item-desc">
+            Spaghetti tossed with garlic, chili flakes, olive oil &amp; sautéed prawns
+          </div>
+        </div>
+        <div class="item-price">$16.80</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-text">
+          <div class="item-name">Herb-Crusted Salmon Fillet</div>
+          <div class="item-desc">
+            Oven-baked salmon with lemon herb crust, mashed potatoes &amp; seasonal vegetables
+          </div>
+        </div>
+        <div class="item-price">$18.50</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-text">
+          <div class="item-name">Warm Chocolate Lava Cake</div>
+          <div class="item-desc">
+            Rich molten-centre chocolate cake served with vanilla bean ice cream
+          </div>
+        </div>
+        <div class="item-price">$8.90</div>
+      </div>
+    </section>
+
+    <!-- Right: Others (4 columns, 24 rows) -->
+    <aside class="sidebar">
+      <!-- 1–2: Header -->
+      <div class="sidebar-header">
+        <h1>AI.CAN/</h1>
+      </div>
+
+      <!-- 3–10: Avatar area (embed goes here) -->
+      <div class="sidebar-avatar">
+        <div id="avatar-slot"></div>
+      </div>
+
+      <!-- 11–24: Order area -->
+      <div class="sidebar-order">
+        <div class="order-title">Order Items</div>
+        <div class="order-subtitle">Columns: Item, Quantity, Price</div>
+
+        <table class="order-table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Quantity</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Blank rows as placeholders -->
+            <tr><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Avatar embed script adapted to fit the avatar box -->
+  <script>
+    !function (window) {
+      const host = "https://labs.heygen.com";
+      const url = host + "/guest/streaming-embed?share=eyJxdWFsaXR5IjoiaGlnaCIsImF2YXRhck5hbWUiOiJKdW5lX0hSX3B1YmxpYyIsInByZXZpZXdJ%0D%0AbWciOiJodHRwczovL2ZpbGVzMi5oZXlnZW4uYWkvYXZhdGFyL3YzLzc0NDQ3YTI3ODU5YTQ1NmM5%0D%0ANTVlMDFmMjFlZjE4MjE2XzQ1NjIwL3ByZXZpZXdfdGFsa18xLndlYnAiLCJuZWVkUmVtb3ZlQmFj%0D%0Aa2dyb3VuZCI6ZmFsc2UsImtub3dsZWRnZUJhc2VJZCI6ImRlbW8tMSIsInVzZXJuYW1lIjoiNzBi%0D%0AOTAyZjRjZTg2NGQxMmI4YWM3ZjkwMjViMjc4NTUifQ%3D%3D&inIFrame=1";
+
+      const wrapDiv = document.createElement("div");
+      wrapDiv.id = "heygen-streaming-embed";
+
+      const container = document.createElement("div");
+      container.id = "heygen-streaming-container";
+
+      const stylesheet = document.createElement("style");
+      stylesheet.innerHTML = `
+        #heygen-streaming-embed {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          border-radius: 16px;
+          border: 2px solid #fff;
+          box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.12);
+          overflow: hidden;
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.15s linear;
+        }
+        #heygen-streaming-embed.show {
+          opacity: 1;
+          visibility: visible;
+        }
+        #heygen-streaming-embed.expand {
+          /* keep same size; just remove circle expansion */
+          border-radius: 16px;
+        }
+        #heygen-streaming-container {
+          width: 100%;
+          height: 100%;
+        }
+        #heygen-streaming-container iframe {
+          width: 100%;
+          height: 100%;
+          border: 0;
+        }
+      `;
+
+      const iframe = document.createElement("iframe");
+      iframe.allowFullscreen = false;
+      iframe.title = "Streaming Embed";
+      iframe.role = "dialog";
+      iframe.allow = "microphone";
+      iframe.src = url;
+
+      let visible = false;
+      let initial = false;
+
+      window.addEventListener("message", (e) => {
+        if (e.origin === host && e.data && e.data.type === "streaming-embed") {
+          if (e.data.action === "init") {
+            initial = true;
+            wrapDiv.classList.toggle("show", initial);
+          } else if (e.data.action === "show") {
+            visible = true;
+            wrapDiv.classList.toggle("expand", visible);
+          } else if (e.data.action === "hide") {
+            visible = false;
+            wrapDiv.classList.toggle("expand", visible);
+          }
+        }
+      });
+
+      container.appendChild(iframe);
+      wrapDiv.appendChild(stylesheet);
+      wrapDiv.appendChild(container);
+
+      const slot = document.getElementById("avatar-slot");
+      if (slot) {
+        slot.appendChild(wrapDiv);
+      } else {
+        // Fallback: attach to body if avatar slot isn't found
+        document.body.appendChild(wrapDiv);
+      }
+    }(globalThis);
+  </script>
+
+  <script>
+    // Simple placeholder JavaScript
+    console.log("AI.CAN/ Menu page with embedded avatar loaded.");
+  </script>
+</body>
+</html>
